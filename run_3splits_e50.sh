@@ -1,8 +1,37 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# 一键跑：epoch=50，3个随机划分（split seed = 0/1/2）各自训练一次
-# 依赖：python 环境已安装并能运行 src.data.build_graph / src.data.split_indication / src.train_baseline
+# One-click run: epoch=50 for split seeds 0/1/2.
+# Requirement: runnable Python env with project dependencies.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${SCRIPT_DIR}"
+
+# Ensure local project package resolution is stable on cloud/container setups.
+export PYTHONPATH="${SCRIPT_DIR}:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON_BIN:-python}"
+
+if [[ ! -f "src/data/build_graph.py" || ! -f "src/train_baseline.py" ]]; then
+  echo "ERROR: expected project files are missing under ${SCRIPT_DIR}."
+  echo "       Make sure you run this script inside the repo root and that src/data exists."
+  exit 2
+fi
+
+"${PYTHON_BIN}" - <<'PY'
+import importlib.util
+import os
+import sys
+
+mods = ["src", "src.data", "src.data.build_graph", "src.train_baseline"]
+missing = [m for m in mods if importlib.util.find_spec(m) is None]
+if missing:
+    print("ERROR: Python module preflight failed.")
+    print("Missing:", missing)
+    print("cwd:", os.getcwd())
+    print("sys.path[0]:", sys.path[0] if sys.path else "")
+    raise SystemExit(2)
+print("Python module preflight passed.")
+PY
 
 EPOCHS=50
 SPLIT_SEEDS=(0 1 2)
@@ -15,13 +44,13 @@ CFG_ROOT="configs/generated"
 mkdir -p "${RUN_ROOT}" "${CFG_ROOT}"
 
 echo "[1/3] Build graph artifacts..."
-python -m src.data.build_graph
+"${PYTHON_BIN}" -m src.data.build_graph
 
 for SPLIT_SEED in "${SPLIT_SEEDS[@]}"; do
   echo "==============================================="
   echo "[split seed=${SPLIT_SEED}] Generating split..."
   SPLIT_DIR="artifacts/splits_seed${SPLIT_SEED}"
-  python -m src.data.split_indication \
+  "${PYTHON_BIN}" -m src.data.split_indication \
     --seed "${SPLIT_SEED}" \
     --output-dir "${SPLIT_DIR}" \
     --train-ratio "${TRAIN_RATIO}" \
@@ -29,7 +58,7 @@ for SPLIT_SEED in "${SPLIT_SEEDS[@]}"; do
     --test-ratio "${TEST_RATIO}"
 
   echo "[split seed=${SPLIT_SEED}] Leakage check..."
-  python -m src.data.leakage_check --splits-dir "${SPLIT_DIR}"
+  "${PYTHON_BIN}" -m src.data.leakage_check --splits-dir "${SPLIT_DIR}"
 
   CFG_PATH="${CFG_ROOT}/baseline_quad_seed${SPLIT_SEED}_e${EPOCHS}.yaml"
   cat > "${CFG_PATH}" <<YAML
@@ -78,7 +107,7 @@ output:
 YAML
 
   echo "[split seed=${SPLIT_SEED}] Training..."
-  python -m src.train_baseline --config "${CFG_PATH}"
+  "${PYTHON_BIN}" -m src.train_baseline --config "${CFG_PATH}"
 done
 
 echo "Done. Runs saved under: ${RUN_ROOT}"

@@ -1,5 +1,5 @@
-# Large data
-data/
+# Large data (root-level only)
+/data/
 
 # Common junk
 __pycache__/
