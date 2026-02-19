@@ -1,0 +1,37 @@
+seed: 0
+
+data:
+  nodes_path: artifacts/nodes.parquet
+  edges_path: artifacts/edges.parquet
+  train_pairs_path: artifacts/splits/train_pairs.parquet
+  val_pairs_path: artifacts/splits/val_pairs.parquet
+  test_pairs_path: artifacts/splits/test_pairs.parquet
+
+model:
+  hidden_dim: 128
+  num_layers: 2
+  dropout: 0.1
+
+train:
+  device: cuda
+  learning_rate: 0.005
+  weight_decay: 1.0e-5
+  negatives_per_positive: 20
+  unlabeled_negative_weight: 1.0
+  max_grad_norm: 5.0
+  keep_train_indication_only: true
+  epochs: 50
+  eval_every: 1
+  early_stopping_patience: 8
+  early_stopping_metric: auprc
+  early_stopping_mode: max
+  early_stopping_min_delta: 0.0
+  early_stopping_restore_best: true
+
+eval:
+  split: val
+  auprc_negatives_per_positive: 20
+  rank_batch_size: 256
+
+output:
+  runs_dir: runs/rgcn
