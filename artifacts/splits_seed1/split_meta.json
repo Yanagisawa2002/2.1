@@ -28,11 +28,11 @@
     "skipped_pair_not_in_indication": 147
   },
   "files": {
-    "train_pairs": "artifacts\\splits_seed1\\train_pairs.parquet",
-    "val_pairs": "artifacts\\splits_seed1\\val_pairs.parquet",
-    "test_pairs": "artifacts\\splits_seed1\\test_pairs.parquet",
-    "train_quadruples": "artifacts\\splits_seed1\\train_quadruples.parquet",
-    "val_quadruples": "artifacts\\splits_seed1\\val_quadruples.parquet",
-    "test_quadruples": "artifacts\\splits_seed1\\test_quadruples.parquet"
+    "train_pairs": "artifacts/splits_seed1/train_pairs.parquet",
+    "val_pairs": "artifacts/splits_seed1/val_pairs.parquet",
+    "test_pairs": "artifacts/splits_seed1/test_pairs.parquet",
+    "train_quadruples": "artifacts/splits_seed1/train_quadruples.parquet",
+    "val_quadruples": "artifacts/splits_seed1/val_quadruples.parquet",
+    "test_quadruples": "artifacts/splits_seed1/test_quadruples.parquet"
   }
 }

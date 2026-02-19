@@ -26,8 +26,8 @@
     "pathway_pathway_data_subset.csv": 5070
   },
   "files": {
-    "nodes": "artifacts\\nodes.parquet",
-    "edges": "artifacts\\edges.parquet",
-    "meta": "artifacts\\graph_meta.json"
+    "nodes": "artifacts/nodes.parquet",
+    "edges": "artifacts/edges.parquet",
+    "meta": "artifacts/graph_meta.json"
   }
 }
