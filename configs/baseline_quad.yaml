@@ -1,0 +1,42 @@
+seed: 0
+
+data:
+  nodes_path: artifacts/nodes.parquet
+  edges_path: artifacts/edges.parquet
+  mechanism_cache_dir: artifacts/cache/mechanism_adjacency
+  train_pairs_path: artifacts/splits/train_pairs.parquet
+  val_pairs_path: artifacts/splits/val_pairs.parquet
+  test_pairs_path: artifacts/splits/test_pairs.parquet
+  train_quadruples_path: artifacts/splits/train_quadruples.parquet
+  val_quadruples_path: artifacts/splits/val_quadruples.parquet
+  test_quadruples_path: artifacts/splits/test_quadruples.parquet
+
+train:
+  embedding_dim: 64
+  learning_rate: 5.0
+  weight_decay: 1.0e-6
+  batch_size: 256
+  negatives_per_positive: 20
+  epochs: 20
+  eval_every: 1
+  early_stopping_patience: 8
+  early_stopping_metric: auprc
+  early_stopping_mode: max
+  early_stopping_min_delta: 0.0
+  early_stopping_restore_best: true
+  use_quadruple: true
+  protein_only: false
+  use_mech_fusion: false
+  strict_mech_graph: true
+  lambda_protein: 1.0
+  lambda_pathway: 1.0
+  unlabeled_negative_weight: 1.0
+  fusion_scale: 0.1
+
+eval:
+  split: val
+  auprc_negatives_per_positive: 20
+  rank_batch_size: 256
+
+output:
+  runs_dir: runs

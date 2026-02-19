@@ -1,0 +1,38 @@
+{
+  "seed": 0,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "pair_counts": {
+    "train": 7510,
+    "val": 938,
+    "test": 940
+  },
+  "quadruple_counts": {
+    "train": 469,
+    "val": 59,
+    "test": 61
+  },
+  "high_order_filtering": {
+    "source_rows": 770,
+    "used_rows": 589,
+    "raw_split_rows": {
+      "train": 501,
+      "val": 59,
+      "test": 61
+    },
+    "skipped_missing_fields": 1,
+    "skipped_invalid_format": 1,
+    "skipped_pair_not_in_indication": 147
+  },
+  "files": {
+    "train_pairs": "artifacts\\splits\\train_pairs.parquet",
+    "val_pairs": "artifacts\\splits\\val_pairs.parquet",
+    "test_pairs": "artifacts\\splits\\test_pairs.parquet",
+    "train_quadruples": "artifacts\\splits\\train_quadruples.parquet",
+    "val_quadruples": "artifacts\\splits\\val_quadruples.parquet",
+    "test_quadruples": "artifacts\\splits\\test_quadruples.parquet"
+  }
+}

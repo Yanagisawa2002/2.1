@@ -1,0 +1,17 @@
+# ExecPlans
+
+## What is an ExecPlan
+An ExecPlan is a living design+implementation checklist that is self-contained:
+- scope, assumptions, non-goals
+- exact files to touch
+- commands to run
+- milestones with acceptance criteria
+- a decision log (why we chose X not Y)
+
+## Required sections
+1. Problem statement (what works after this plan)
+2. Data contracts (inputs/outputs and file formats)
+3. Implementation plan (milestones)
+4. Verification plan (tests + smoke runs)
+5. Risks & mitigations
+6. Progress log (update as you implement)

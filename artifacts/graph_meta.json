@@ -1,0 +1,33 @@
+{
+  "num_nodes": 47559,
+  "num_edges": 7355715,
+  "node_type_counts": {
+    "disease": 18216,
+    "drug": 6673,
+    "gene/protein": 19614,
+    "pathway": 3056
+  },
+  "relation_counts": {
+    "disease_disease": 64388,
+    "disease_pathway_direct_mapped": 233870,
+    "disease_protein": 5823132,
+    "drug_protein": 369550,
+    "indication": 18776,
+    "pathway_pathway": 5070,
+    "pathway_protein": 198636,
+    "protein_pathway": 143,
+    "protein_protein": 642150
+  },
+  "indication_edge_count": 18776,
+  "source_row_counts": {
+    "kg_filtered_subset_ext_drugprotein.csv": 7097999,
+    "indication_data_subset.csv": 18776,
+    "disease_pathway_direct_mapped.csv": 233870,
+    "pathway_pathway_data_subset.csv": 5070
+  },
+  "files": {
+    "nodes": "artifacts\\nodes.parquet",
+    "edges": "artifacts\\edges.parquet",
+    "meta": "artifacts\\graph_meta.json"
+  }
+}

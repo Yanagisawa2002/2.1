@@ -1,0 +1,15 @@
+# Large data
+data/
+
+# Common junk
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.env
+outputs/
+runs/
+logs/
+checkpoints/
+.DS_Store
+.vscode/
